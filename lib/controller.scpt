@@ -3,8 +3,15 @@ on control(direction)
     var direction = " & direction & ";
     var event = new MouseEvent('click', { 'view': window, 'bubbles': true, 'cancelable': true });
 
-    var className = direction == 'next' ? 'yt-uix-button-icon-watch-queue-next' : 'yt-uix-button-icon-watch-queue-prev';
-    var nextButton = document.getElementsByClassName(className)[0];
+    var nextButton = null;
+    var className = null;
+
+    className = direction == 'next' ? 'yt-uix-button-icon-watch-appbar-play-next' : 'yt-uix-button-icon-watch-appbar-play-prev';
+    nextButton = document.getElementsByClassName(className)[0];
+    if (nextButton === undefined) {
+      className = direction == 'next' ? 'yt-uix-button-icon-watch-queue-next' : 'yt-uix-button-icon-watch-queue-prev';
+      nextButton = document.getElementsByClassName(className)[0];
+    }
     nextButton.dispatchEvent(event);
   "
 
