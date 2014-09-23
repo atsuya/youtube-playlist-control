@@ -3,14 +3,18 @@ on control(direction)
     var direction = " & direction & ";
     var event = new MouseEvent('click', { 'view': window, 'bubbles': true, 'cancelable': true });
 
+    var classNames = {
+      'next': ['yt-uix-button-icon-watch-appbar-play-next', 'yt-uix-button-icon-watch-queue-next'],
+      'previous': ['yt-uix-button-icon-watch-appbar-play-prev', 'yt-uix-button-icon-watch-queue-prev'],
+      'play': ['yt-uix-button-icon-watch-appbar-play-play', 'yt-uix-button-icon-watch-queue-play'],
+      'pause': ['yt-uix-button-icon-watch-appbar-play-pause', 'yt-uix-button-icon-watch-queue-pause']
+    };
     var nextButton = null;
-    var className = null;
+    var className = classNames[direction];
 
-    className = direction == 'next' ? 'yt-uix-button-icon-watch-appbar-play-next' : 'yt-uix-button-icon-watch-appbar-play-prev';
-    nextButton = document.getElementsByClassName(className)[0];
+    nextButton = document.getElementsByClassName(className[0])[0];
     if (nextButton === undefined) {
-      className = direction == 'next' ? 'yt-uix-button-icon-watch-queue-next' : 'yt-uix-button-icon-watch-queue-prev';
-      nextButton = document.getElementsByClassName(className)[0];
+      nextButton = document.getElementsByClassName(className[1])[0];
     }
     nextButton.dispatchEvent(event);
   "
