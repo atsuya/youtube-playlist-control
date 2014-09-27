@@ -6,17 +6,26 @@ on control(direction)
     var classNames = {
       'next': ['yt-uix-button-icon-watch-appbar-play-next', 'yt-uix-button-icon-watch-queue-next'],
       'previous': ['yt-uix-button-icon-watch-appbar-play-prev', 'yt-uix-button-icon-watch-queue-prev'],
-      'play': ['yt-uix-button-icon-watch-appbar-play-play', 'yt-uix-button-icon-watch-queue-play'],
-      'pause': ['yt-uix-button-icon-watch-appbar-play-pause', 'yt-uix-button-icon-watch-queue-pause']
+      'play': ['ytp-button-play', 'yt-uix-button-icon-watch-appbar-play-play', 'yt-uix-button-icon-watch-queue-play'],
+      'pause': ['ytp-button-pause', 'yt-uix-button-icon-watch-appbar-play-pause', 'yt-uix-button-icon-watch-queue-pause']
     };
-    var nextButton = null;
     var className = classNames[direction];
+    var theClassName = null;
 
-    nextButton = document.getElementsByClassName(className[0])[0];
-    if (nextButton === undefined) {
-      nextButton = document.getElementsByClassName(className[1])[0];
+    className.forEach(function each(klass) {
+      if (document.getElementsByClassName(klass)[0] !== undefined) {
+        console.log('found: ' + klass);
+        if (!theClassName) {
+          theClassName = klass;
+        }
+      }
+    });
+
+    if (theClassName) {
+      console.log('using: ' + theClassName);
+      var nextButton = document.getElementsByClassName(theClassName)[0]
+      nextButton.dispatchEvent(event);
     }
-    nextButton.dispatchEvent(event);
   "
 
   set targetTab to activeTab() of me
